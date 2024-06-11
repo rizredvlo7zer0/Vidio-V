@@ -26,11 +26,9 @@
     height: auto;
     border-radius: 10px;
   }
-  /* Animasi pada hover */
   .video-player:hover {
     box-shadow: 4px 4px 20px #0a0a0a, -4px -4px 20px #363636;
   }
-  /* Tipografi Besar & Eksperimental */
   h1 {
     text-align: center;
     font-size: 3rem;
@@ -38,21 +36,35 @@
     text-transform: uppercase;
     letter-spacing: 2px;
   }
-  /* Style untuk playlist */
   .playlist ul {
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
   }
   .playlist li {
+    flex: 0 1 calc(33.333% - 10px);
+    margin: 5px;
+    text-align: center; /* Tambahkan ini untuk memastikan teks terpusat */
+  }
+  .playlist img {
     cursor: pointer;
     padding: 10px;
     background: #333;
     margin: 5px 0;
     border-radius: 5px;
-    text-align: center;
+    width: 100px;
+    height: 75px;
   }
-  .playlist li:hover {
+  .playlist img:hover {
     background: #444;
+  }
+  .playlist figcaption {
+    color: #999;
+    font-size: 0.8rem;
+    text-align: center;
   }
 </style>
 </head>
@@ -62,27 +74,33 @@
   <h1>ᴠɪʀᴀʟ</h1>
   <div class="video-player">
     <video id="homeVideo" controls>
-      <source src="htps://h.top4top.io/m_3083d7uij0.mp4" type="video/mp4">
+      <source src=".mp4" type="video/mp4">
     </video>
   </div>
-  <!-- Playlist video yang dapat diklik -->
   <div class="playlist">
     <ul>
-      <li onclick="playVideo('https://h.top4top.io/m_3083d7uij0.mp4')">Video 1</li>
-      <li onclick="playVideo('https://g.top4top.io/m_30837dc590.mp4')">Video 2</li>
-      <li onclick="playVideo('https://l.top4top.io/m_3083lx0av0.mp4')">Video 3</li>
-      <!-- Tambahkan lebih banyak item daftar sesuai dengan jumlah video -->
+      <li>
+        <img src="https://i.top4top.io/p_308401avp0.jpg" onclick="playVideo('https://h.top4top.io/m_3083d7uij0.mp4')" />
+        <figcaption>Viral Video 1</figcaption>
+      </li>
+      <li>
+        <img src="https://l.top4top.io/p_3084i9lvi0.png" onclick="playVideo('https://g.top4top.io/m_30837dc590.mp4')" />
+        <figcaption>Viral Video 2</figcaption>
+      </li>
+      <li>
+        <img src="https://h.top4top.io/p_3084nfn690.png" onclick="playVideo('https://l.top4top.io/m_3083lx0av0.mp4')" />
+        <figcaption>Viral Video 3</figcaption>
+      </li>
+      <!-- Tambahkan lebih banyak <li> dengan <img> dan <figcaption> sesuai dengan jumlah video -->
     </ul>
   </div>
 </div>
 
-<!-- Bootstrap JS dan jQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 <script>
-  // Fungsi untuk memutar video berdasarkan URL yang diberikan
   function playVideo(url) {
     var videoPlayer = document.getElementById('homeVideo');
     videoPlayer.src = url;
