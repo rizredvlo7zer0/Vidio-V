@@ -43,6 +43,8 @@
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+    max-height: 400px; /* Tentukan tinggi maksimum */
+    overflow-y: auto; /* Tambahkan scrollbar vertikal jika konten melebihi tinggi */
   }
   .playlist li {
     flex: 0 1 calc(33.333% - 10px);
@@ -107,7 +109,15 @@
         <img src="https://e.top4top.io/p_3085h1xib0.png" onclick="playVideo('https://a.top4top.io/m_3085b1e5z0.mp4')" />
         <figcaption>Viral Video 7</figcaption>
       </li>
-      <!-- Tambahkan lebih banyak <li> dengan <img> dan <figcaption> sesuai dengan jumlah video -->
+      <li>
+        <img src="https://a.top4top.io/p_3085ulphb0.jpg" onclick="playVideo('https://e.top4top.io/m_3085eb6l70.mp4')" />
+        <figcaption>Viral Video 8</figcaption>
+      </li>
+      <li>
+        <img src="https://e.top4top.io/p_3086vq52e0.jpg" onclick="playVideo('https://h.top4top.io/m_3086c8aol0.mp4')" />
+        <figcaption>Viral Video 9</figcaption>
+      </li>
+      <!-- Tambahkan elemen <li> lainnya sesuai kebutuhan -->
     </ul>
   </div>
 </div>
