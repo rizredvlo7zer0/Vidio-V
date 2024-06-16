@@ -63,17 +63,19 @@
   .playlist img:hover {
     background: #444;
   }
-  .playlist figcaption {
-    color: #999;
-    font-size: 0.8rem;
-    text-align: center;
-  }
+  
+   /* Updated CSS for total video text */
+   .total-video-text {
+     text-align: center; 
+     color: #999; 
+     font-size: 1rem; 
+     margin-top:10px; 
+   }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <!--<h1>ᴠɪʀᴀʟ</h1>-->
   <div class="video-player">
     <video id="homeVideo" controls>
       <source src=".mp4" type="video/mp4">
@@ -121,11 +123,10 @@
         <img src="https://b.top4top.io/p_308938nzq0.png" onclick="playVideo('https://j.top4top.io/m_3089bgyyd0.mp4')" />
         <figcaption>Viral Video 10</figcaption>
       </li>
-      <!-- Tambahkan elemen <li> lainnya sesuai kebutuhan -->
-    </ul>
-  </div>
-</div>
+<!-- Tambahkan elemen <li> lainnya sesuai kebutuhan -->
+</ul>
 
+<!-- Updated JavaScript to include total video count -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -137,6 +138,14 @@
     videoPlayer.load();
     videoPlayer.play();
   }
+  
+  document.addEventListener('DOMContentLoaded', (event) => {
+      const jumlahPlaylist = document.querySelector('.playlist ul').children.length;
+      const elemenJumlah = document.createElement('p');
+      elemenJumlah.textContent = `Total Video : ${jumlahPlaylist}`;
+      elemenJumlah.classList.add('total-video-text'); // This applies the new CSS styling
+      document.querySelector('.playlist').prepend(elemenJumlah);
+  });
 </script>
 </body>
 </html>
