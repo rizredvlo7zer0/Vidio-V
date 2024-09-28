@@ -27,10 +27,11 @@
         .video-container {
             background-color: #282828;
             border-radius: 8px;
-            margin: 5px 0;
+            margin: 5px 0; /* You can adjust this if you want more/less spacing */
             overflow: hidden;
             transition: transform 0.3s;
-            width: 80%; /* Set width to a specific value */
+            width: 100%; /* Set width to 100% to fill the screen */
+            max-width: 800px; /* Optional: Set a max width for larger screens */
         }
         .video-container:hover {
             transform: scale(1.02);
@@ -48,7 +49,7 @@
         }
         @media (min-width: 900px) {
             .video-container {
-                width: 60%;
+                width: 90%; /* Slightly less than full width for larger screens */
             }
         }
         h2 {
@@ -56,10 +57,18 @@
             margin: 10px 0;
             color: #ffeb3b; /* Color for titles */
         }
+        #loading {
+            display: none; /* Hidden by default */
+            color: #ffffff;
+            font-size: 1.5em;
+            text-align: center;
+            margin: 20px 0;
+        }
     </style>
 </head>
 <body>
     
+    <div id="loading">Loading videos...</div>
     <div id="videoPlaylist">
         <!-- Video list will be inserted here -->
     </div>
@@ -70,6 +79,9 @@
 
         // Function to fetch data from the API
         async function fetchVideoFeed() {
+            const loadingIndicator = document.getElementById('loading');
+            loadingIndicator.style.display = 'block'; // Show loading indicator
+
             try {
                 const response = await fetch(apiUrl, {
                     method: 'GET',
@@ -88,6 +100,8 @@
                 displayVideos(data.feed.entry); // Display videos
             } catch (error) {
                 console.error('Error fetching data:', error); // Handle error
+            } finally {
+                loadingIndicator.style.display = 'none'; // Hide loading indicator
             }
         }
 
