@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Playlist</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.5em;
+            color: #ff4081;
+        }
+        #videoPlaylist {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .video-container {
+            background-color: #282828;
+            border-radius: 8px;
+            margin: 5px 0;
+            overflow: hidden;
+            transition: transform 0.3s;
+            width: 80%; /* Set width to a specific value */
+        }
+        .video-container:hover {
+            transform: scale(1.02);
+        }
+        iframe {
+            display: block;
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+        @media (min-width: 600px) {
+            iframe {
+                height: 315px; /* larger height for bigger screens */
+            }
+        }
+        @media (min-width: 900px) {
+            .video-container {
+                width: 60%;
+            }
+        }
+        h2 {
+            text-align: center; /* Center title */
+            margin: 10px 0;
+            color: #ffeb3b; /* Color for titles */
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="videoPlaylist">
+        <!-- Video list will be inserted here -->
+    </div>
+
+    <script>
+        // URL API to fetch data from
+        const apiUrl = 'https://api.allorigins.win/raw?url=https://vieralola.blogspot.com/feeds/posts/default?alt=json';
+
+        // Function to fetch data from the API
+        async function fetchVideoFeed() {
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    mode: 'cors' // Request CORS permission
+                });
+
+                // Check if response is ok (status in the range 200-299)
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+
+                const data = await response.json(); // Convert response to JSON
+                displayVideos(data.feed.entry); // Display videos
+            } catch (error) {
+                console.error('Error fetching data:', error); // Handle error
+            }
+        }
+
+        // Function to display videos on the page
+        function displayVideos(entries) {
+            const videoContainer = document.getElementById('videoPlaylist');
+
+            entries.forEach(entry => {
+                const content = entry.content.$t;
+
+                // Extract title from entry
+                const title = entry.title.$t;
+
+                // Extract video URLs from content
+                const videoUrls = content.match(/src='(.*?)'/g);
+
+                if (videoUrls) {
+                    videoUrls.forEach(videoUrl => {
+                        const url = videoUrl.split("'")[1];
+
+                        // Create video container
+                        const videoDiv = document.createElement('div');
+                        videoDiv.classList.add('video-container');
+
+                        // Create title element
+                        const titleElement = document.createElement('h2');
+                        titleElement.textContent = title;
+
+                        // Create iframe for video
+                        const iframe = document.createElement('iframe');
+                        iframe.src = url;
+                        iframe.allowFullscreen = true;
+
+                        // Append title and iframe to video container
+                        videoDiv.appendChild(titleElement);
+                        videoDiv.appendChild(iframe);
+
+                        // Append video container to the main video list
+                        videoContainer.appendChild(videoDiv);
+                    });
+                }
+            });
+        }
+
+        // Call function to load and display videos
+        fetchVideoFeed();
+    </script>
+</body>
+</html>
