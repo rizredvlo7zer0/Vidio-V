@@ -151,3 +151,28 @@
     </script>
 </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reload Page Once After 5 Seconds</title>
+    <script>
+        // Fungsi untuk me-reload halaman setelah 5 detik
+        function reloadPage() {
+            // Mengecek apakah halaman sudah di-reload atau belum
+            if (!sessionStorage.getItem('reloaded')) {
+                sessionStorage.setItem('reloaded', 'true');  // Set flag di sessionStorage
+                setTimeout(function() {
+                    location.reload();  // Reload halaman
+                }, 5000);  // Waktu 5 detik
+            }
+        }
+        window.onload = reloadPage;
+    </script>
+</head>
+<body>
+    <h1>Halaman ini akan reload sekali setelah 5 detik</h1>
+</body>
+</html>
